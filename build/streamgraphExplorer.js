@@ -8587,8 +8587,8 @@ const StreamGraph = (selection, props) => {
     .enter().append('text')
       .attr('class', 'streamgraph-title')
     .merge(titleText)
-      .attr('x', innerWidth * 0.02)
-      .attr('y', innerHeight * 0.3)
+      .attr('x', innerHeight * 0.02)
+      .attr('y', innerHeight * 0.02)
       .text(title + (stacked.length > 1 ? 's' : ''));
 };
 
