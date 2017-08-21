@@ -2628,9 +2628,9 @@ function basis(t1, v0, v1, v2, v3) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__src_defaultLocale__ = __webpack_require__(49);
 /* unused harmony reexport timeFormatDefaultLocale */
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__src_defaultLocale__["a"]; });
+/* unused harmony reexport timeParse */
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_0__src_defaultLocale__["b"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_0__src_defaultLocale__["c"]; });
-/* unused harmony reexport utcParse */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__src_locale__ = __webpack_require__(90);
 /* unused harmony reexport timeFormatLocale */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__src_isoFormat__ = __webpack_require__(91);
@@ -2649,9 +2649,9 @@ function basis(t1, v0, v1, v2, v3) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return timeFormat; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return timeParse; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return utcFormat; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return utcParse; });
+/* unused harmony export timeParse */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return utcFormat; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return utcParse; });
 /* unused harmony export default */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__locale__ = __webpack_require__(90);
 
@@ -4827,7 +4827,7 @@ function formatIsoNative(date) {
 
 var formatIso = Date.prototype.toISOString
     ? formatIsoNative
-    : Object(__WEBPACK_IMPORTED_MODULE_0__defaultLocale__["c" /* utcFormat */])(isoSpecifier);
+    : Object(__WEBPACK_IMPORTED_MODULE_0__defaultLocale__["b" /* utcFormat */])(isoSpecifier);
 
 /* unused harmony default export */ var _unused_webpack_default_export = (formatIso);
 
@@ -7815,7 +7815,7 @@ dataFlow('destStreamDataAllYears', __WEBPACK_IMPORTED_MODULE_5__interpolate__["a
 const zoomFilter = (data, zoomExtent) => {
   const min = zoomExtent[0];
   const max = zoomExtent[1];
-  return data.filter(d => d.date > min && d.date < max);
+  return data.filter(d => d.date >= min && d.date <= max);
 };
 dataFlow('srcStreamData', zoomFilter, 'srcStreamDataAllYears, zoomExtent');
 dataFlow('destStreamData', zoomFilter, 'destStreamDataAllYears, zoomExtent');
@@ -9535,7 +9535,7 @@ function parseIsoNative(string) {
 
 var parseIso = +new Date("2000-01-01T00:00:00.000Z")
     ? parseIsoNative
-    : Object(__WEBPACK_IMPORTED_MODULE_1__defaultLocale__["d" /* utcParse */])(__WEBPACK_IMPORTED_MODULE_0__isoFormat__["a" /* isoSpecifier */]);
+    : Object(__WEBPACK_IMPORTED_MODULE_1__defaultLocale__["c" /* utcParse */])(__WEBPACK_IMPORTED_MODULE_0__isoFormat__["a" /* isoSpecifier */]);
 
 /* unused harmony default export */ var _unused_webpack_default_export = (parseIso);
 
@@ -9553,7 +9553,7 @@ var parseIso = +new Date("2000-01-01T00:00:00.000Z")
 
 
 /* harmony default export */ __webpack_exports__["a"] = (function() {
-  return Object(__WEBPACK_IMPORTED_MODULE_0__time__["a" /* calendar */])(__WEBPACK_IMPORTED_MODULE_2_d3_time__["t" /* utcYear */], __WEBPACK_IMPORTED_MODULE_2_d3_time__["p" /* utcMonth */], __WEBPACK_IMPORTED_MODULE_2_d3_time__["s" /* utcWeek */], __WEBPACK_IMPORTED_MODULE_2_d3_time__["k" /* utcDay */], __WEBPACK_IMPORTED_MODULE_2_d3_time__["l" /* utcHour */], __WEBPACK_IMPORTED_MODULE_2_d3_time__["n" /* utcMinute */], __WEBPACK_IMPORTED_MODULE_2_d3_time__["q" /* utcSecond */], __WEBPACK_IMPORTED_MODULE_2_d3_time__["m" /* utcMillisecond */], __WEBPACK_IMPORTED_MODULE_1_d3_time_format__["c" /* utcFormat */]).domain([Date.UTC(2000, 0, 1), Date.UTC(2000, 0, 2)]);
+  return Object(__WEBPACK_IMPORTED_MODULE_0__time__["a" /* calendar */])(__WEBPACK_IMPORTED_MODULE_2_d3_time__["t" /* utcYear */], __WEBPACK_IMPORTED_MODULE_2_d3_time__["p" /* utcMonth */], __WEBPACK_IMPORTED_MODULE_2_d3_time__["s" /* utcWeek */], __WEBPACK_IMPORTED_MODULE_2_d3_time__["k" /* utcDay */], __WEBPACK_IMPORTED_MODULE_2_d3_time__["l" /* utcHour */], __WEBPACK_IMPORTED_MODULE_2_d3_time__["n" /* utcMinute */], __WEBPACK_IMPORTED_MODULE_2_d3_time__["q" /* utcSecond */], __WEBPACK_IMPORTED_MODULE_2_d3_time__["m" /* utcMillisecond */], __WEBPACK_IMPORTED_MODULE_1_d3_time_format__["b" /* utcFormat */]).domain([Date.UTC(2000, 0, 1), Date.UTC(2000, 0, 2)]);
 });
 
 
@@ -10603,8 +10603,8 @@ const keys = (nestedData, maxStreamLayers, minStreamMax) => {
 
 
 const zoomFormatStr = '%Y';
-const zoomFormat = Object(__WEBPACK_IMPORTED_MODULE_0_d3_time_format__["a" /* timeFormat */])(zoomFormatStr);
-const zoomParse = Object(__WEBPACK_IMPORTED_MODULE_0_d3_time_format__["b" /* timeParse */])(zoomFormatStr);
+const zoomFormat = Object(__WEBPACK_IMPORTED_MODULE_0_d3_time_format__["b" /* utcFormat */])(zoomFormatStr);
+const zoomParse = Object(__WEBPACK_IMPORTED_MODULE_0_d3_time_format__["c" /* utcParse */])(zoomFormatStr);
 const zoomSplitStr = '-';
 
 const encodeZoom = zoomExtent => {
