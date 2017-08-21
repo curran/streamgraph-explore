@@ -5849,7 +5849,7 @@ Object(__WEBPACK_IMPORTED_MODULE_3__dataFlow__["a" /* default */])((box, data, t
       onBrushStart: () => __WEBPACK_IMPORTED_MODULE_3__dataFlow__["a" /* default */].showStreamLabels(false),
       onBrushEnd: () => __WEBPACK_IMPORTED_MODULE_3__dataFlow__["a" /* default */].showStreamLabels(true)
     });
-}, 'contextStreamBox, dataByYear, timeExtent');
+}, 'contextStreamBox, contextStreamData, timeExtent');
 
 
 /***/ }),
@@ -7794,13 +7794,16 @@ dataFlow('dataByDest', Object(__WEBPACK_IMPORTED_MODULE_4__aggregateBy__["a" /* 
 // Compute data for context panel, aggregated by only time.
 dataFlow('dataByYear', __WEBPACK_IMPORTED_MODULE_4__aggregateBy__["b" /* aggregateByYears */], 'dataFiltered');
 
+// Fill in zero values so we have a curve that matches the stream shape.
+dataFlow('contextStreamData', __WEBPACK_IMPORTED_MODULE_5__interpolate__["b" /* interpolateTotals */], 'allYears, dataByYear');
+
 // Compute keys, top N (maxStreamLayers) sorted by max value.
 dataFlow('srcKeys', __WEBPACK_IMPORTED_MODULE_6__keys__["a" /* default */], 'dataBySrc, maxStreamLayers, minStreamMax');
 dataFlow('destKeys', __WEBPACK_IMPORTED_MODULE_6__keys__["a" /* default */], 'dataByDest, maxStreamLayers, minStreamMax');
 
 // Interpolate the aggregated data so there are values for all years.
-dataFlow('srcStreamDataAllYears', __WEBPACK_IMPORTED_MODULE_5__interpolate__["a" /* default */], 'allYears, dataBySrc');
-dataFlow('destStreamDataAllYears', __WEBPACK_IMPORTED_MODULE_5__interpolate__["a" /* default */], 'allYears, dataByDest');
+dataFlow('srcStreamDataAllYears', __WEBPACK_IMPORTED_MODULE_5__interpolate__["a" /* interpolate */], 'allYears, dataBySrc');
+dataFlow('destStreamDataAllYears', __WEBPACK_IMPORTED_MODULE_5__interpolate__["a" /* interpolate */], 'allYears, dataByDest');
 
 // Compute the data filtered by zoomed region.
 const zoomFilter = (data, zoomExtent) => {
@@ -10540,8 +10543,24 @@ const interpolate = (years, nestedData) => {
     return row;
   });
 };
+/* harmony export (immutable) */ __webpack_exports__["a"] = interpolate;
 
-/* harmony default export */ __webpack_exports__["a"] = (interpolate);
+
+const interpolateTotals = (years, data) => {
+  return years.map(date => {
+
+    // Create a new row object with the date.
+    const row = { date };
+
+    data.forEach(d => {
+      row.value = interpolateValue(data, date);
+    });
+
+    return row;
+  });
+};
+/* harmony export (immutable) */ __webpack_exports__["b"] = interpolateTotals;
+
 
 
 /***/ }),
